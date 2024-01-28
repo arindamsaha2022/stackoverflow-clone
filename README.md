@@ -1,6 +1,5 @@
 # Stack Overflow Clone
 
-![Stack Overflow Clone Logo](/client/src/assets/logo.png)
 
 ## Table of Contents
 
