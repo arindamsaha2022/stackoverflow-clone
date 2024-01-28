@@ -1,6 +1,6 @@
 import React from 'react'
 
-const avatar = ({children, backgroundColor, px, py, color, borderRadius, fontSize, cursor}) => {
+const Avatar = ({children, backgroundColor, px, py, color, borderRadius, fontSize, cursor}) => {
   const style = {
     backgroundColor,
     padding: `${py} ${px}` ,
@@ -20,4 +20,4 @@ const avatar = ({children, backgroundColor, px, py, color, borderRadius, fontSiz
   )
 }
 
-export default avatar
+export default Avatar

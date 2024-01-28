@@ -1,15 +1,16 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Your project description goes here",
   "main": "index.js",
   "type": "module",
   "scripts": {
-   "start": "index.js"
+    "start": "nodemon node index.js "
   },
-  "author": "",
+  "author": "Your Name or Your Organization",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",

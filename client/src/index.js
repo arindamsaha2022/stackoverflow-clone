@@ -1,5 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+
+import ReactDOM from "react-dom/client";  // Change this line
 import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
@@ -16,4 +17,3 @@ root.render(
     </React.StrictMode>
   </Provider>
 );
-

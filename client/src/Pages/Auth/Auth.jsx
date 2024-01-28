@@ -3,9 +3,9 @@ import './auth.css';
 import icon from '../../assets/icon.png';
 import logo from '../../assets/logo.png';
 import AboutAuth from './AboutAuth';
-import { singup,login } from '../../actions/auth';
-import {useDispatch} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
+import { signup, login } from '../../actions/auth';
+import { useDispatch } from 'react-redux';  
+import { useNavigate } from 'react-router-dom';  
 
 
 const Auth = () => {
@@ -14,36 +14,43 @@ const Auth = () => {
     const [email, setEmail]= useState('')
     const [password, setPassword]= useState('')
 
-    const dispach = useDispatch()
-    const history = useNavigate()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSwitch = () => {
-        setIsSignup(!isSignup);
-    };
-    const handleSbmit =(e)=>{
-        e.preventDefault()
-        if(!email && !password){
-            alert("Enter a name to continue")
-        }
-        if(isSignup){
-            if(!name){
-                alert('Enter a name to continue')
-            }
-            singup({name,email, password}, history)
-        }else{
-            login({email, password},history)
-        }
+        setIsSignup(!isSignup)
     }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (!email && !password) {
+            alert('Enter email and password');
+            return;
+        }
+
+        if (isSignup){
+            if (!name) {
+                alert("Enter a name to continue");
+                return;
+            }
+            dispatch(signup({ name, email, password }, navigate));
+        } else {
+            dispatch(login({ email, password }, navigate));
+        }
+        
+        
+    }
+
 
     return (
         <section className="auth-section">
-            {isSignup ? <AboutAuth/>: null}
+          {isSignup && <AboutAuth />}
+
             <div className='auth-container-2'>               
                 { isSignup ?  <img src={logo}  alt='stack overflow clone' className="login-logo" style={{ width: '200px', height: '75px' }}/>: <img src={icon}  alt='stack overflow clone' className="login-logo" style={{ width: '75px', height: '75px' }}/> }
-                <form onSubmit={handleSbmit}>
+                <form onSubmit={handleSubmit}>
                     {
                         isSignup  ?
-                        <label>
+                        <label htmlFor='name'>
                              <h4>Display Name</h4>
                              <input type='text' id='name' name='name' onChange={(e)=>{setName(e.target.value)}}/>
                         </label>:null
@@ -57,7 +64,7 @@ const Auth = () => {
                             <h4>Password</h4> 
                             {isSignup? null: <p>Forgot password?</p>}
                         </div>
-                        <input type='password' name='password' id='password'onChange={(e)=>{setPassword(e.target.value)}}/>
+                        <input type='password' name='password' id='password' autoComplete="on" onChange={(e)=>{setPassword(e.target.value)}}/>
                         {isSignup ? <p style={{ color: "#666767", fontSize:"13px"}}>Passwords must contain at least eight<br />characters, including at least 1 letter and 1<br /> number.</p>: null}
                         {
                             isSignup ? (

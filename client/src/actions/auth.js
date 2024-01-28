@@ -1,20 +1,24 @@
-import { redirect } from 'react-router-dom'
-import * as api from '../api'
-export const singup = (authData, history)=>async(dispatch)=>{
-    try {
-        const{data}= await api.singUp(authData)
-        dispatch({type:'AUTH', data})
-        redirect('/')
-    } catch (error) {
-        console.log(error);
-    }
-}
-export const login = (authData, history)=>async(dispatch)=>{
+import { setCurrentUser } from './currentUser'
+import * as api from '../api';
+
+export const signup = (authData, navigate) => async (dispatch) => {
   try {
-      const{data}= await api.singUp(authData)
-      dispatch({type:'AUTH', data})
-      redirect('/')
+    const { data } = await api.signUp(authData);
+    dispatch({ type: 'AUTH', data });
+    dispatch(setCurrentUser(JSON.parse(localStorage.getItem('Profile'))));
+    navigate('/');
   } catch (error) {
-      console.log(error);
+    console.log(error,"error ro signup");
   }
-}
+};
+
+export const login = (authData, navigate) => async (dispatch) => {
+  try {
+    const { data } = await api.logIn(authData);
+    dispatch({ type: 'AUTH', data });
+    dispatch({ type: 'LOAD_PROFILE', payload: JSON.parse(localStorage.getItem('Profile')) });
+    navigate('/');
+  } catch (error) {
+    console.log(error);
+  }
+};
