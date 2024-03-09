@@ -3,6 +3,7 @@ import { useLocation, useNavigate, } from 'react-router-dom';
 import "./HomeMainBar.css";
 import { useSelector} from 'react-redux'
 import QuestionList from "./QuestinosList";
+import Loding form "../src/assets/loding.gif"
 
 
 const HomeMainbar = () => {
@@ -86,7 +87,7 @@ const HomeMainbar = () => {
           <div>
               {
                   questionsList.data === null ?
-                  <h1>Loading...</h1> :
+                  <Loding/> :
                   <>
                       <p>{ questionsList.data.length } questions</p>
                       <QuestionList questionsList={questionsList.data} />
